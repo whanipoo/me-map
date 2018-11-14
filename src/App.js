@@ -7,7 +7,7 @@ import Sidebar from "./components/Sidebar";
 class App extends Component {
   constructor() {
     super();
-
+//Set array variables
     this.state = {
       venues: [],
       markers: [],
@@ -26,7 +26,7 @@ class App extends Component {
     });
     this.setState({ markers: Object.assign(this.state.markers, markers) });
   }
-
+//Close all markers' windows except the one that is clicked
   handleMarkerClick = marker => {
     this.closeAllMarkers();
     marker.isOpen = true;
@@ -49,7 +49,7 @@ class App extends Component {
   componentDidMount() {
     SquareAPI.search({
       near: "Bangkok, Thailand",
-      query: "mall",
+      query: "Mall",
       limit: 10
     }).then(results => {
       const { venues } = results.response;

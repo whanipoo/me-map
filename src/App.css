@@ -9,6 +9,7 @@
 .sidebar {
   width: 25%;
   background: black;
+  min-width: 300px;
 }
 
 input[type="search" i] {

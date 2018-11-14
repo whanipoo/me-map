@@ -9,7 +9,7 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-
+//Set map's default and style
 const MyMapComponent = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
@@ -31,7 +31,7 @@ const MyMapComponent = withScriptjs(
                 key={index}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={() => props.handleMarkerClick(marker)}
-              >
+              > //Marker window shows the location's information
                 {marker.isOpen && (
                   <InfoWindow>
                     <React.Fragment>
@@ -46,7 +46,7 @@ const MyMapComponent = withScriptjs(
     </GoogleMap>
   ))
 );
-
+//Render the map
 export default class Map extends Component {
   render() {
     return (

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+//Sidebar component
 export default class Sidebar extends Component {
   constructor() {
     super();
@@ -17,7 +17,7 @@ export default class Sidebar extends Component {
     }
     return this.props.venues;
   };
-
+//Filter Input: Set markers' visibility based on user input filter
   handleChange = evt => {
     this.setState({ query: evt.target.value });
     const markers = this.props.venues.map(venue => {
@@ -44,6 +44,9 @@ export default class Sidebar extends Component {
           placeholder="Filter Venues"
           value={this.state.query}
           onChange={this.handleChange}
+          tabIndex="0"
+          aria-labelledby="txtboxLabel"
+          autoFocus={true}
         />
         <ol className="venuelist">
           {this.handleFilterVenues() &&
@@ -51,6 +54,9 @@ export default class Sidebar extends Component {
               <li
                 className="listitem"
                 onClick={() => this.props.handleListItemClick(venue)}
+                tabIndex="0"
+                role="button"
+                key={index}
               >
                 {venue.name}
               </li>
