@@ -24,8 +24,3 @@ Users can click the markdown icons to see each location's information or by clic
 5. This project used Google Map API https://cloud.google.com/maps-platform/
 6. This project used Foursquare API https://developer.foursquare.com/
 7. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-# Please Note
-
-I was able to add images and urls to location's websites. However, I reached Foursqaure API limit resulted in some errors, so I decided to took out the photos and website urls, since I won't have enough time to wait for the limit to reset and today is the last day to submit project 😞
-Fortunately, I was able to keep the address.

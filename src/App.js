@@ -7,7 +7,7 @@ import Sidebar from "./components/Sidebar";
 class App extends Component {
   constructor() {
     super();
-//Set array variables
+    //Set array variables
     this.state = {
       venues: [],
       markers: [],
@@ -15,7 +15,8 @@ class App extends Component {
       zoom: 12,
       updateSuperState: obj => {
         this.setState(obj);
-      }
+      },
+      error: false
     };
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
     });
     this.setState({ markers: Object.assign(this.state.markers, markers) });
   }
-//Close all markers' windows except the one that is clicked
+  //Close all markers' windows except the one that is clicked
   handleMarkerClick = marker => {
     this.closeAllMarkers();
     marker.isOpen = true;
@@ -37,7 +38,7 @@ class App extends Component {
     SquareAPI.getVenueDetails(marker.id).then(res => {
       const newVenue = Object.assign(venue, res.response.venue);
       this.setState({ venues: Object.assign(this.state.venues, newVenue) });
-      console.log(newVenue);
+      //console.log(newVenue);
     });
   };
 
@@ -51,32 +52,41 @@ class App extends Component {
       near: "Bangkok, Thailand",
       query: "Mall",
       limit: 10
-    }).then(results => {
-      const { venues } = results.response;
-      const { center } = results.response.geocode.feature.geometry;
-      const markers = venues.map(venue => {
-        return {
-          lat: venue.location.lat,
-          lng: venue.location.lng,
-          isOpen: false,
-          isVisible: true,
-          id: venue.id
-        };
-      });
+    })
+      .then(results => {
+        const { venues } = results.response;
+        const { center } = results.response.geocode.feature.geometry;
+        const markers = venues.map(venue => {
+          return {
+            lat: venue.location.lat,
+            lng: venue.location.lng,
+            isOpen: false,
+            isVisible: true,
+            id: venue.id
+          };
+        });
 
-      this.setState({ venues, center, markers });
-      console.log(results);
-    });
+        this.setState({ venues, center, markers });
+      })
+      .catch(err => {
+        this.setState({ error: true });
+      });
   }
 
   render() {
     return (
-      <div className="App">
-        <Sidebar
-          {...this.state}
-          handleListItemClick={this.handleListItemClick}
-        />
-        <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
+      <div>
+        {this.state.error ? (
+          <p>App cannot reach FourSquare API servers</p>
+        ) : (
+          <div className="App">
+            <Sidebar
+              {...this.state}
+              handleListItemClick={this.handleListItemClick}
+            />
+            <Map {...this.state} handleMarkerClick={this.handleMarkerClick} />
+          </div>
+        )}
       </div>
     );
   }

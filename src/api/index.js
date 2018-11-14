@@ -42,7 +42,6 @@ class Helper {
 
 export default class SquareAPI {
   static search(urlPrams) {
-    console.log("IM HERE", urlPrams);
     return Helper.simpleFetch("/venues/search", "GET", urlPrams);
   }
   static getVenueDetails(VENUE_ID) {

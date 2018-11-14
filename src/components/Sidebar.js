@@ -17,7 +17,7 @@ export default class Sidebar extends Component {
     }
     return this.props.venues;
   };
-//Filter Input: Set markers' visibility based on user input filter
+  //Filter Input: Set markers' visibility based on user input filter
   handleChange = evt => {
     this.setState({ query: evt.target.value });
     const markers = this.props.venues.map(venue => {
@@ -37,7 +37,7 @@ export default class Sidebar extends Component {
 
   render() {
     return (
-      <div className="sidebar">
+      <div aria-label="sidebar" className="sidebar">
         <input
           type="search"
           id="serach"
@@ -45,7 +45,7 @@ export default class Sidebar extends Component {
           value={this.state.query}
           onChange={this.handleChange}
           tabIndex="0"
-          aria-labelledby="txtboxLabel"
+          aria-label="txtboxLabel"
           autoFocus={true}
         />
         <ol className="venuelist">
